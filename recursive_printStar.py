@@ -1,27 +1,30 @@
 n= int(input())
-list=[["*" for j in range(n)] for i in range(n)]
+result= [["*" for j in range(n)] for i in range(n)]
 
-def printStar(row, col, list, way):
-    max= len(list)    
-    temp= 0
-    if row<max and col<max:
-        while temp<= max*3:
-            if max/3<=row<(max/3)*2 and max/3<=col<(max/3)*2:
-                list[row][col]= " "           
-            elif way== 1:
-                if temp<col<=temp+2  and col%3==1 and row%3==1: 
-                    list[row][col]= " "    
-            temp+=3 
+def printSt(num,result):
+    third= int(num/3)
+    k=0    
+    
+    while third*2+k<=n:
+        for i in range(1,n):
+            if third+k<= i <third*2+k:
+                d= 0
+                
+                for j in range(1, n):              
+                    if third +d<= j < third*2+d :        
+                        result[i][j]= " "
+                        
+                        if j+1== third*2+d:
+                            d+=num
+        k+=num
             
-        if row<max and col== max-1:
-            return printStar(row+1, 0, list, 2)
-        else:
-            return printStar(row, col+1, list, 1)        
-    else:
-        return
+    if num<= 3:
+        return result
+        
+    return printSt(third, result)
 
-printStar(0, 0, list, 1)
-for i in list:
-    for j in i:
-        print(j, end="")
-    print()
+
+for i in printSt(n, result):
+	for j in i:
+		print(j, end="")
+	print()
